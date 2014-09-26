@@ -21,7 +21,6 @@ public class Chatbot
 		chatCount = 0;
 	}
 	
-	
 	/**
 	 * Returns the name of the Chatbot object.
 	 * @return The current name of the Chatbot.
@@ -30,7 +29,6 @@ public class Chatbot
 	{
 		return name;
 	}
-	
 	
 	/**
 	 * It will return the number of times the Chatbot has responded.
@@ -41,16 +39,14 @@ public class Chatbot
 		return chatCount;
 	}
 	
-	
 	/**
 	 * Creates a string that shows the name of the user.
-	 * @param name The supplied name for the user.
+	 * @param name The new name for the chatbot.
 	 */
 	public void setName(String name)
 	{
 		this.name = name;
 	}
-	
 	
 	/**
 	 * Updates and adds one to the chat count everytime that param is called 
@@ -60,7 +56,6 @@ public class Chatbot
 	{
 		chatCount++;
 	}
-	
 	
 	/**
 	 * Checks the input for a certain variable and will quit if true
