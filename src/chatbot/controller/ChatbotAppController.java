@@ -15,7 +15,9 @@ public class ChatbotAppController
 		applicationView = new ChatbotView(this);
 		mySillyChatbot = new Chatbot("Derf");
 	}
-	
+	/**
+	 * This will loop the quitChecker over and over until the "Correct" input is used.
+	 */
 	public void start()
 	{
 		String result = applicationView.showChatbot("Zac");
@@ -27,7 +29,9 @@ public class ChatbotAppController
 		
 		quit();
 	}
-	
+	/**
+	 * If the "Correct" input is used, this will show the message and quit the application.
+	 */
 	private void quit()
 	{
 		JOptionPane.showMessageDialog(null, "Goodbye cruel world");
