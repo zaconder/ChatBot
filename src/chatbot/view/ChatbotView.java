@@ -22,8 +22,19 @@ public class ChatbotView
 		String result = "";
 		
 		JOptionPane.showMessageDialog(null, "Hello, " + currentInput);
-		result = JOptionPane.showInputDialog(null, "Are you done?");
+		
+		result = JOptionPane.showInputDialog(null, baseController.getMySillyChatbot().getName() + " says: " + currentInput);
 		
 		return result;
 	}
+	
+	/**
+	 * Shows a String from the Chatbot as a popup window.
+	 * @param currentInput The string from the Chatbot.
+	 */
+	public void showChatbotMessage(String currentInput)
+	{
+		JOptionPane.showMessageDialog(null, baseController.getMySillyChatbot().getName() + " says: " + currentInput);
+	}
+	
 }

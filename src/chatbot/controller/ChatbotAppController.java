@@ -4,26 +4,41 @@ import javax.swing.JOptionPane;
 
 import chatbot.model.Chatbot;
 import chatbot.view.ChatbotView;
-
+/**
+ * Runs the Chatbot Project. Owns the model and associated views
+ * @author Zac Conder
+ * @version 1.2 10/2/14 - cleaned the quit method.
+ */
 public class ChatbotAppController
 {
 	private ChatbotView applicationView;
 	private Chatbot mySillyChatbot;
+	private String startMessage;
+	private String quitMessage;
 	
 	public ChatbotAppController()
 	{
 		applicationView = new ChatbotView(this);
 		mySillyChatbot = new Chatbot("Derf");
+		startMessage = "Welcome to the " + mySillyChatbot.getName() + " chatbot. What is your name?";
+		quitMessage = "goodbye cruel user :(";
 	}
+	
+	public Chatbot getMySillyChatbot()
+	{
+		return mySillyChatbot;
+	}
+	
 	/**
 	 * This will loop the quitChecker over and over until the "Correct" input is used.
 	 */
 	public void start()
 	{
-		String result = applicationView.showChatbot("Zac");
+		String result = applicationView.showChatbot(startMessage);
 			
 		while(!mySillyChatbot.quitChecker(result))
 		{
+			result = mySillyChatbot.proccessText(result);
 			result = applicationView.showChatbot(result);
 		}
 		
@@ -34,7 +49,7 @@ public class ChatbotAppController
 	 */
 	private void quit()
 	{
-		JOptionPane.showMessageDialog(null, "Goodbye cruel world");
+		applicationView.showChatbotMessage(quitMessage);
 		System.exit(0);
 		
 	}
