@@ -21,8 +21,6 @@ public class ChatbotView
 	{
 		String result = "";
 		
-		JOptionPane.showMessageDialog(null, "Hello, " + currentInput);
-		
 		result = JOptionPane.showInputDialog(null, baseController.getMySillyChatbot().getName() + " says: " + currentInput);
 		
 		return result;
