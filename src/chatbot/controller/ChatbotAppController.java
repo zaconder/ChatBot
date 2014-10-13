@@ -15,6 +15,7 @@ public class ChatbotAppController
 	private Chatbot mySillyChatbot;
 	private String startMessage;
 	private String quitMessage;
+	private String contentMessages;
 	
 	public ChatbotAppController()
 	{
@@ -22,6 +23,7 @@ public class ChatbotAppController
 		mySillyChatbot = new Chatbot("Derf");
 		startMessage = "Welcome to the " + mySillyChatbot.getName() + " chatbot. What is your name?";
 		quitMessage = "goodbye cruel user :(";
+		contentMessages = "That's really cool I love riding motorcycles too!";
 	}
 	
 	public Chatbot getMySillyChatbot()
@@ -38,7 +40,7 @@ public class ChatbotAppController
 			
 		while(!mySillyChatbot.quitChecker(result))
 		{
-			result = mySillyChatbot.proccessText(result);
+			result = mySillyChatbot.processText(result);
 			result = applicationView.showChatbot(result);
 		}
 		

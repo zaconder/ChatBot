@@ -3,7 +3,7 @@ package chatbot.model;
 import java.util.ArrayList;
 
 /**
- * The chatbot model class. Used for checking and manipulationg Strings.
+ * The chatbot model class. Used for checking and manipulating Strings.
  * @author zcon5199
  * @version 1.1 9/26/14
  */
@@ -12,6 +12,8 @@ public class Chatbot
 	private ArrayList<String> memeList;
 	private String name;
 	private int chatCount;
+	private String contentArea;
+	private ArrayList<String> contentList;
 	
 	/**
 	 * Creates a Chatbot object with the supplied name and initializes the current number of chats to zero.
@@ -21,9 +23,12 @@ public class Chatbot
 	public Chatbot(String name)
 	{
 		memeList = new ArrayList<String>();
+		contentList = new ArrayList<String>();
 		this.name = name;
+		contentArea = "";
 		chatCount = 0;
 		fillTheMemeList();
+		fillTheContentList();
 	}
 	
 	/**
@@ -63,26 +68,11 @@ public class Chatbot
 		memeList.add("y u no");
 	}
 	
-	/**
-	 * Processes input from the user against the checker methods.  Returns the next output for the view.
-	 * @param currentInputThe supplied text.
-	 * @return The Processed text based on checker or other methods.
-	 */
-	public String proccessText(String currentInput)
+	private void fillTheContentList()
 	{
-		String result = "";
-		
-		if(memeChecker(currentInput))
-		{
-			result = "wow, " + currentInput + " is a meme, wohoo!";
-		}
-		else
-		{
-			result = "not a meme, try again";
-		}
-		
-		return result;
+		contentList.add("motorcycles");
 	}
+	
 	/**
 	 * Updates and adds one to the chat count everytime that param is called 
 	 * @updateChatCount
@@ -130,4 +120,73 @@ public class Chatbot
 		
 		return okToQuit;
 	}
+	
+	public boolean contentChecker(String contentMessageinput)
+	{
+		boolean contentMessages = false;
+		
+		if(contentMessageinput != null && contentMessageinput.contains("motorcycle"))
+		{
+			contentMessages = true;
+		}
+		
+		return contentMessages;
+		
+	}
+	
+	private boolean stringLengthChecker(String input)
+	{
+		boolean isFour = false;
+		
+		if (input.length() >= 20)
+		{
+			isFour = true;
+		}
+		return isFour;
+	}
+	
+	public String processText(String currentInput)
+	{
+		String result = "";
+		
+		int randomPosition = (int) (Math.random() * 3);
+		if (currentInput != null)
+		{
+			if (randomPosition == 0)
+			{
+				if (stringLengthChecker(currentInput))
+				{
+					result = "too long";
+				}
+				else
+				{
+					result = "short words";
+				}
+			}
+			else if (randomPosition == 1)
+			{
+				if (contentChecker(currentInput))
+				{
+					result = "That's really cool I love motorcycles";
+				}
+				else
+				{
+					result = "Try other words!";
+				}
+			}
+			else
+			{
+				if (memeChecker(currentInput))
+				{
+					result = "Wow, " + currentInput + " is a meme, wahoo!";
+				}
+				else
+				{
+					result = "not a meme, try again";
+				}
+			}
+		}
+		return result;
+	}
+	
 }
