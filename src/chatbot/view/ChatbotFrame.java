@@ -4,10 +4,21 @@ import javax.swing.JFrame;
 
 import chatbot.controller.ChatbotAppController;
 
+/**
+ * GUI Frame class for a Chatbot. Shows the basic framework code for a JFrame extension
+ * @author zcon5199
+ * @version 1.1 10/21/14
+ */
 public class ChatbotFrame extends JFrame
 {
+	/**
+	 * Reference for the ChatbotPanel of the GUI.
+	 */
 	private ChatbotPanel basePanel;
-	
+	/**
+	 * Creates a ChatbotFrame with a reference to the ChatbotAppController to pass to the panel for MCV.
+	 * @param baseController The reference to the controller object.
+	 */
 	public ChatbotFrame(ChatbotAppController baseController) 
 	{
 		basePanel = new ChatbotPanel(baseController);
@@ -15,6 +26,9 @@ public class ChatbotFrame extends JFrame
 		setupFrame();
 	}
 
+	/**
+	 * Helper method to load panel into frame, set size, and visibility
+	 */
 	private void setupFrame()
 	{
 		this.setContentPane(basePanel);
