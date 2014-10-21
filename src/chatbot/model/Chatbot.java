@@ -121,11 +121,11 @@ public class Chatbot
 		return okToQuit;
 	}
 	
-	public boolean contentChecker(String contentMessageinput)
+	public boolean contentChecker(String currentInput)
 	{
 		boolean contentMessages = false;
 		
-		if(contentMessageinput != null && contentMessageinput.contains("motorcycle"))
+		if(currentInput != null && currentInput.contains("motorcycle"))
 		{
 			contentMessages = true;
 		}
