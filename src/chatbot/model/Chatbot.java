@@ -12,7 +12,7 @@ public class Chatbot
 	private ArrayList<String> memeList;
 	private String name;
 	private int chatCount;
-	private String contentArea;
+	private String contentMessages;
 	private ArrayList<String> contentList;
 	
 	/**
@@ -25,7 +25,7 @@ public class Chatbot
 		memeList = new ArrayList<String>();
 		contentList = new ArrayList<String>();
 		this.name = name;
-		contentArea = "";
+		setContentMessages("");
 		chatCount = 0;
 		fillTheMemeList();
 		fillTheContentList();
@@ -187,6 +187,16 @@ public class Chatbot
 			}
 		}
 		return result;
+	}
+
+	public String getContentMessages()
+	{
+		return contentMessages;
+	}
+
+	public void setContentMessages(String contentMessages)
+	{
+		this.contentMessages = contentMessages;
 	}
 	
 }
