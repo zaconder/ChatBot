@@ -14,21 +14,25 @@ public class Chatbot
 	private int chatCount;
 	private String contentMessages;
 	private ArrayList<String> contentList;
+	private ChatUser myUser;
+	private ArrayList<String> userInputList;
 	
 	/**
 	 * Creates a Chatbot object with the supplied name and initializes the current number of chats to zero.
-
+	 *
 	 * @param name The supplied name for the Chatbot.
 	 */
 	public Chatbot(String name)
 	{
 		memeList = new ArrayList<String>();
 		contentList = new ArrayList<String>();
+		userInputList = new ArrayList<String>();
 		this.name = name;
 		setContentMessages("");
 		chatCount = 0;
 		fillTheMemeList();
 		fillTheContentList();
+		myUser = new ChatUser();
 	}
 	
 	/**
@@ -138,7 +142,7 @@ public class Chatbot
 	{
 		boolean isFour = false;
 		
-		if (input.length() >= 20)
+		if (input.length() >= 10)
 		{
 			isFour = true;
 		}
@@ -149,7 +153,12 @@ public class Chatbot
 	{
 		String result = "";
 		
-		int randomPosition = (int) (Math.random() * 3);
+		if(getChatCount() < 7)
+		{
+			//Ask 
+		}
+		
+		int randomPosition = (int) (Math.random() * 6);
 		if (currentInput != null)
 		{
 			if (randomPosition == 0)
@@ -174,7 +183,7 @@ public class Chatbot
 					result = "Try other words!";
 				}
 			}
-			else
+			else if(randomPosition == 2)
 			{
 				if (memeChecker(currentInput))
 				{
@@ -185,8 +194,52 @@ public class Chatbot
 					result = "not a meme, try again";
 				}
 			}
+			else if(randomPosition == 3)
+			{
+				//Talk about the user here :D
+			}
+			else if(randomPosition == 4)
+			{
+				//add to our list
+				userInputList.add(currentInput);
+				result = "Thank you for the comment";
+			}
+			else
+			{
+				if(userInputChecker(currentInput))
+				{
+					
+				}
+				else
+				{
+					
+				}
+				
+			}
 		}
 		return result;
+	}
+	
+	private boolean userInputChecker(String userInput)
+	{
+		boolean matchesInput = false;
+		
+		for(int loopCount = 0; loopCount < userInputList.size(); loopCount++)
+		{
+			if(userInput.equalsIgnoreCase(userInputList.get(loopCount)))
+			{
+				matchesInput = true;
+				userInputList.remove(loopCount);
+				loopCount--;
+				//You have to have a -- if you're removing a from a list.
+			}
+		}
+		return matchesInput;
+	}
+	
+	private void updateChatCount1()
+	{
+		chatCount++;
 	}
 
 	public String getContentMessages()

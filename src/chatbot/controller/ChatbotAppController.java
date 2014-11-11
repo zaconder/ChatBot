@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import chatbot.model.Chatbot;
 import chatbot.view.ChatbotFrame;
 import chatbot.view.ChatbotView;
+import chatbot.view.ChatbotPanel;
 /**
  * Runs the Chatbot Project. Owns the model and associated views
  * @author Zac Conder
@@ -35,12 +36,12 @@ public class ChatbotAppController
 	/**
 	 * Reference to the GUI JFrame object for the appliacation
 	 */
-	private ChatbotFrame appFrame;
+	private ChatbotFrame baseFrame;
 	
 	public ChatbotAppController()
 	{
 		applicationView = new ChatbotView(this);
-		appFrame = new ChatbotFrame(this);
+		baseFrame = new ChatbotFrame(this);
 		mySillyChatbot = new Chatbot("Derf");
 		startMessage = "Welcome to the " + mySillyChatbot.getName() + " chatbot. What is your name?";
 		quitMessage = "goodbye cruel user :(";
@@ -57,7 +58,11 @@ public class ChatbotAppController
 	 */
 	public void start()
 	{
-		String result = applicationView.showChatbot(startMessage);
+		ChatbotPanel myAppPanel = (ChatbotPanel) baseFrame.getContentPane();
+		myAppPanel.displayTextToUser(startMessage);
+		
+		
+//		String result = applicationView.showChatbot(startMessage);
 			
 //		while(!mySillyChatbot.quitChecker(result))
 //		{
@@ -65,6 +70,20 @@ public class ChatbotAppController
 //			result = applicationView.showChatbot(result);
 //		}
 //		quit();
+	}
+	
+	/**
+	 * Transmits information from the View package to the Chatbot.
+	 * @param userInput The user supplied text.
+	 * @return The chatbot processed text.
+	 */
+	public String sendTextToChatBot(String userInput)
+	{
+		String respondText = "";
+		
+		respondText = mySillyChatbot.processText(userInput);
+		
+		return respondText;
 	}
 	/**
 	 * If the "Correct" input is used, this will show the message and quit the application.

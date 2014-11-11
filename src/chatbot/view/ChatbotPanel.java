@@ -11,6 +11,7 @@ import javax.swing.SpringLayout;
 
 import chatbot.controller.ChatbotAppController;
 import javax.swing.*;
+import chatbot.model.Chatbot;
 
 public class ChatbotPanel extends JPanel
 {
@@ -26,6 +27,7 @@ public class ChatbotPanel extends JPanel
 	private JButton secondButton;
 	
 	private JButton sendButton;
+	
 	
 	/**
 	 * this will Create a TextField called "firstTextField"
@@ -95,7 +97,7 @@ public class ChatbotPanel extends JPanel
 	
 	private void setupListeners()
 	{
-		
+
 		firstButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent click)
@@ -116,11 +118,18 @@ public class ChatbotPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				chatArea.setText(firstTextField.getText());
-
+				String userTypedText = firstTextField.getText();
+				String chatbotResponse = baseController.sendTextToChatBot(userTypedText);
+				displayTextToUser(userTypedText);
+				displayTextToUser(chatbotResponse);
+				firstTextField.setText("");
 			}
 		});
 		
+	}
+	public void displayTextToUser(String input)
+	{
+		chatArea.append("\n" + input);
 	}
 	
 }
