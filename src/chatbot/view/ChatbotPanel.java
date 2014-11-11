@@ -28,7 +28,6 @@ public class ChatbotPanel extends JPanel
 	
 	private JButton sendButton;
 	
-	
 	/**
 	 * this will Create a TextField called "firstTextField"
 	 */

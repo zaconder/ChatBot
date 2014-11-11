@@ -14,7 +14,7 @@ public class Chatbot
 	private int chatCount;
 	private String contentMessages;
 	private ArrayList<String> contentList;
-	private ChatUser myUser;
+	private ChatbotUser myUser;
 	private ArrayList<String> userInputList;
 	
 	/**
@@ -32,7 +32,7 @@ public class Chatbot
 		chatCount = 0;
 		fillTheMemeList();
 		fillTheContentList();
-		myUser = new ChatUser();
+		myUser = new ChatbotUser();
 	}
 	
 	/**
@@ -153,9 +153,21 @@ public class Chatbot
 	{
 		String result = "";
 		
-		if(getChatCount() < 7)
+		if(getChatCount() < 5)
 		{
-			//Ask 
+			//Ask questions about all data members here
+			//you will need ifs or a switch
+			//assign via myUser.set...
+			if(getChatCount() == 0)
+			{
+				myUser.setUserName(currentInput);
+				result = "Good name " + myUser.getUserName() + " how old are you?";
+			}
+			else if(getChatCount() == 1)
+			{
+				int userAge = Integer.parseInt(currentInput);
+				myUser.setAge(userAge);
+			}
 		}
 		
 		int randomPosition = (int) (Math.random() * 6);
@@ -217,6 +229,7 @@ public class Chatbot
 				
 			}
 		}
+		updateChatCount();
 		return result;
 	}
 	
@@ -237,11 +250,6 @@ public class Chatbot
 		return matchesInput;
 	}
 	
-	private void updateChatCount1()
-	{
-		chatCount++;
-	}
-
 	public String getContentMessages()
 	{
 		return contentMessages;
