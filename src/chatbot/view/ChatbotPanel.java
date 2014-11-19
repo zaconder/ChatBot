@@ -66,6 +66,7 @@ public class ChatbotPanel extends JPanel
 	{
 		chatArea.setLineWrap(true);
 		chatArea.setWrapStyleWord(true); //ask about what this means "setWrapStyleWord"
+		chatArea.setEditable(false);
 	}
 
 	private void setupPanel()
@@ -96,12 +97,11 @@ public class ChatbotPanel extends JPanel
 	
 	private void setupListeners()
 	{
-
 		firstButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				chatArea.setText(chatArea.getText()+ " -:D");
+				
 			}
 		});
 		
@@ -122,6 +122,7 @@ public class ChatbotPanel extends JPanel
 				displayTextToUser(userTypedText);
 				displayTextToUser(chatbotResponse);
 				firstTextField.setText("");
+				firstTextField.requestFocus();
 			}
 		});
 		

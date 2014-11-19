@@ -125,11 +125,11 @@ public class Chatbot
 		return okToQuit;
 	}
 	
-	public boolean contentChecker(String currentInput)
+	public boolean contentChecker(String input)
 	{
 		boolean contentMessages = false;
 		
-		if(currentInput != null && currentInput.contains("motorcycle"))
+		if(input != null && input.contains("motorcycle"))
 		{
 			contentMessages = true;
 		}
@@ -155,82 +155,130 @@ public class Chatbot
 		
 		if(getChatCount() < 5)
 		{
-			//Ask questions about all data members here
-			//you will need ifs or a switch
-			//assign via myUser.set...
-			if(getChatCount() == 0)
-			{
-				myUser.setUserName(currentInput);
-				result = "Good name " + myUser.getUserName() + " how old are you?";
-			}
-			else if(getChatCount() == 1)
-			{
-				int userAge = Integer.parseInt(currentInput);
-				myUser.setAge(userAge);
-			}
+			result = introduceUser(currentInput);
 		}
-		
-		int randomPosition = (int) (Math.random() * 6);
-		if (currentInput != null)
+		else if (currentInput != null && currentInput.length() > 0)
 		{
-			if (randomPosition == 0)
-			{
-				if (stringLengthChecker(currentInput))
-				{
-					result = "too long";
-				}
-				else
-				{
-					result = "short words";
-				}
-			}
-			else if (randomPosition == 1)
-			{
-				if (contentChecker(currentInput))
-				{
-					result = "That's really cool I love motorcycles";
-				}
-				else
-				{
-					result = "Try other words!";
-				}
-			}
-			else if(randomPosition == 2)
-			{
-				if (memeChecker(currentInput))
-				{
-					result = "Wow, " + currentInput + " is a meme, wahoo!";
-				}
-				else
-				{
-					result = "not a meme, try again";
-				}
-			}
-			else if(randomPosition == 3)
-			{
-				//Talk about the user here :D
-			}
-			else if(randomPosition == 4)
-			{
-				//add to our list
-				userInputList.add(currentInput);
-				result = "Thank you for the comment";
-			}
-			else
-			{
-				if(userInputChecker(currentInput))
-				{
-					
-				}
-				else
-				{
-					
-				}
-				
-			}
+			result = introduceUser(currentInput);
+		}
+		else
+		{
+			result = "use words!!!";
+			chatCount--;
 		}
 		updateChatCount();
 		return result;
+	}
+	
+	private String introduceUser(String input)
+	{
+		String userQuestion = "";
+		
+		if(getChatCount() == 0)
+		{
+			myUser.setUserName(input);
+			userQuestion = "Good name " + myUser.getUserName() + " how old are you?";
+		}
+		else if(getChatCount() == 1)
+		{
+			int userAge = Integer.parseInt(input);
+			myUser.setAge(userAge);
+			userQuestion = "Garsh, you are really old " + myUser.getUserName() + " how much do you weigh?";
+		}
+		else if(getChatCount() == 2)
+		{
+			double userWeight = Double.parseDouble(input);
+			myUser.setWeight(userWeight);
+			userQuestion = "Yikes that is a lot less than a dwarf star " + myUser.getUserName() + " do you have tattoos?";
+		}
+		else if(getChatCount() == 3)
+		{
+			boolean userTatts = Boolean.parseBoolean(input);
+			myUser.setHasTattoos(userTatts);
+			userQuestion = "That's cool, I like tattoos " + myUser.getUserName() + " do you have corrective lenses?";
+		}
+		else
+		{
+			boolean userLenses = Boolean.parseBoolean(input);
+			myUser.setNeedsCorrectiveLenses(userLenses);
+			userQuestion = "I love my glasses :D " + myUser.getUserName() + " What do you want to talk about??";
+		}
+		
+		
+		return userQuestion;
+	}
+		
+	private String randomChatConversation(String input)
+	{
+		String conversation = "";
+		
+		int randomPosition = (int) (Math.random() * 6);
+		if (randomPosition == 0)
+		{
+			if (stringLengthChecker(input))
+			{
+				conversation = "too long";
+			}
+			else
+			{
+				conversation = "short words";
+			}
+		}
+		else if (randomPosition == 1)
+		{
+			if (contentChecker(input))
+			{
+				conversation = "That's really cool I love motorcycles";
+			}
+			else
+			{
+				conversation = "Try other words!";
+			}
+		}
+		else if(randomPosition == 2)
+		{
+			if (memeChecker(input))
+			{
+				conversation = "Wow, " + input + " is a meme, wahoo!";
+			}
+			else
+			{
+				conversation = "not a meme, try again";
+			}
+		}
+		else if(randomPosition == 3)
+		{
+			//Talk about the user here :D
+		}
+		else if(randomPosition == 4)
+		{
+			//add to our list
+			userInputList.add(input);
+			conversation = "Thank you for the comment";
+		}
+		return conversation;
+	}
+	
+	public String userTopic(String userInput)
+	{
+		String userBasedResponse = "";
+		
+		int randomUserTopic = (int) (Math.random() * 6);
+		
+		switch(randomUserTopic)
+		{
+			case 1:
+				userBasedResponse = myUser.getAge() + "";
+				break;
+			case 0:
+				
+				break;
+			default:
+					break;
+		}
+		
+		
+		return userBasedResponse;
 	}
 	
 	private boolean userInputChecker(String userInput)

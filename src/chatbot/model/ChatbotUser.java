@@ -56,4 +56,15 @@ public class ChatbotUser
 	{
 		this.age = userAge;
 	}
+
+	public void setHasTattoos(boolean userTatts)
+	{
+		this.hasTattoos = false;
+	}
+
+	public void setNeedsCorrectiveLenses(boolean userLenses)
+	{
+		this.needsCorrectiveLenses = false;
+	}
+
 }
