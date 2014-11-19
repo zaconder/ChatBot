@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * The chatbot model class. Used for checking and manipulating Strings.
  * @author zcon5199
- * @version 1.1 9/26/14
+ * @version 1.5 11/19/14 Added some new methodes for the process text.
  */
 public class Chatbot
 {
@@ -204,7 +204,6 @@ public class Chatbot
 			userQuestion = "I love my glasses :D " + myUser.getUserName() + " What do you want to talk about??";
 		}
 		
-		
 		return userQuestion;
 	}
 		
@@ -256,9 +255,25 @@ public class Chatbot
 			userInputList.add(input);
 			conversation = "Thank you for the comment";
 		}
+		else
+		{
+			if (userInputChecker(input))
+			{
+				conversation = "That  was nice  you removed it from the list";
+			}
+			else
+			{
+				conversation = "that wasn't in the conversation before";
+			}
+		}
 		return conversation;
 	}
 	
+	/**
+	 * Provides output based on the ChatbotUser object. Uses a switch/case structure for testing.
+	 * @param userInput 
+	 * @return 
+	 */
 	public String userTopic(String userInput)
 	{
 		String userBasedResponse = "";
@@ -268,15 +283,15 @@ public class Chatbot
 		switch(randomUserTopic)
 		{
 			case 1:
-				userBasedResponse = myUser.getAge() + "";
+				userBasedResponse = myUser.hasTattoos() + " is the response to tattoos :D";
 				break;
 			case 0:
-				
+				userBasedResponse = myUser.getUserName() + " is a silly name :P";
 				break;
 			default:
-					break;
+				userBasedResponse = myUser.getAge() + " is reallllly reallllllly old";
+				break;
 		}
-		
 		
 		return userBasedResponse;
 	}

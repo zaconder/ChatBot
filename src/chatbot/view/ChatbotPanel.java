@@ -88,10 +88,10 @@ public class ChatbotPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, chatPane, 20, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, sendButton, 1, SpringLayout.NORTH, firstTextField);
 		baseLayout.putConstraint(SpringLayout.WEST, sendButton, 6, SpringLayout.EAST, firstTextField);
-		baseLayout.putConstraint(SpringLayout.SOUTH, secondButton, -6, SpringLayout.NORTH, firstTextField);
 		baseLayout.putConstraint(SpringLayout.SOUTH, firstButton, 0, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.EAST, firstButton, -10, SpringLayout.EAST, firstTextField);
 		baseLayout.putConstraint(SpringLayout.NORTH, chatPane, 20, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, secondButton, 0, SpringLayout.SOUTH, chatPane);
 		baseLayout.putConstraint(SpringLayout.WEST, secondButton, 0, SpringLayout.WEST, chatPane);
 	}
 	
