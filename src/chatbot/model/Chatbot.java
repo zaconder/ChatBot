@@ -159,7 +159,7 @@ public class Chatbot
 		}
 		else if (currentInput != null && currentInput.length() > 0)
 		{
-			result = introduceUser(currentInput);
+			result = randomChatConversation(currentInput);
 		}
 		else
 		{
@@ -211,7 +211,7 @@ public class Chatbot
 	{
 		String conversation = "";
 		
-		int randomPosition = (int) (Math.random() * 6);
+		int randomPosition = (int) (Math.random() * 7);
 		if (randomPosition == 0)
 		{
 			if (stringLengthChecker(input))
@@ -255,7 +255,7 @@ public class Chatbot
 			userInputList.add(input);
 			conversation = "Thank you for the comment";
 		}
-		else
+		else if(randomPosition == 5)
 		{
 			if (userInputChecker(input))
 			{
@@ -266,7 +266,41 @@ public class Chatbot
 				conversation = "that wasn't in the conversation before";
 			}
 		}
+		else
+		{
+			if(mashChecker(input))
+			{
+				conversation = mashingDetected(input);
+			}
+			else
+			{
+				conversation = noMashingDetected(input);
+			}
+		}
 		return conversation;
+	}
+	
+	private String mashingDetected(String input)
+	{
+		String mashed = "";
+		
+		mashed = input.substring(input.length()/2);
+		mashed += input.substring(input.length()/2);
+		mashed += input.substring(input.length()/2);
+		mashed += input.substring(input.length()/2);
+		mashed += input.substring(input.length()/2);
+				
+		return mashed;
+	}
+	
+	private String noMashingDetected(String input)
+	{
+		String noMashing = "Thank you for not mashing you keyboard with ";
+		if(input.length() > 1)
+		{
+		noMashing += input.substring(input.length()/3, input.length()/2);
+		}
+		return noMashing;
 	}
 	
 	/**
@@ -274,7 +308,7 @@ public class Chatbot
 	 * @param userInput 
 	 * @return 
 	 */
-	public String userTopic(String userInput)
+	public String userTopic(String input)
 	{
 		String userBasedResponse = "";
 		
@@ -296,13 +330,13 @@ public class Chatbot
 		return userBasedResponse;
 	}
 	
-	private boolean userInputChecker(String userInput)
+	private boolean userInputChecker(String input) //changed "userInput" to "input"
 	{
 		boolean matchesInput = false;
 		
 		for(int loopCount = 0; loopCount < userInputList.size(); loopCount++)
 		{
-			if(userInput.equalsIgnoreCase(userInputList.get(loopCount)))
+			if(input.equalsIgnoreCase(userInputList.get(loopCount)))
 			{
 				matchesInput = true;
 				userInputList.remove(loopCount);
@@ -310,7 +344,24 @@ public class Chatbot
 				//You have to have a -- if you're removing a from a list.
 			}
 		}
+		
 		return matchesInput;
+	}
+	
+	/**
+	 * Checker for keyboard mashing.
+	 * @param input The user supplied text.
+	 * @return Whether mashing has been detected.
+	 */
+	private boolean mashChecker(String input)
+	{
+		boolean isMashing = false;
+		if(input.indexOf("asdf") > -1)
+		{
+			isMashing = true;
+		}
+		
+		return isMashing;
 	}
 	
 	public String getContentMessages()

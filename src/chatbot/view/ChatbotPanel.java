@@ -23,11 +23,14 @@ public class ChatbotPanel extends JPanel
 	 * This will create a button called "firstButton"
 	 */
 	private JButton firstButton;
-	
+	/**
+	 * This will create a button called "secondButton"
+	 */
 	private JButton secondButton;
-	
+	/**
+	 * This will create a button called "sendButton"
+	 */
 	private JButton sendButton;
-	
 	/**
 	 * this will Create a TextField called "firstTextField"
 	 */
