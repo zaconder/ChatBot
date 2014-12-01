@@ -9,8 +9,17 @@ import java.util.ArrayList;
  */
 public class Chatbot
 {
+	/**
+	 * The programmer supplied list of memes.
+	 */
 	private ArrayList<String> memeList;
+	/**
+	 * The name of the Chatbot
+	 */
 	private String name;
+	/**
+	 * The current user of the chatbot object.
+	 */
 	private int chatCount;
 	private String contentMessages;
 	private ArrayList<String> contentList;
@@ -62,6 +71,9 @@ public class Chatbot
 		this.name = name;
 	}
 	
+	/**
+	 * fills the array with strings.
+	 */
 	private void fillTheMemeList()
 	{
 		memeList.add("Kitties");
@@ -72,6 +84,9 @@ public class Chatbot
 		memeList.add("y u no");
 	}
 	
+	/**
+	 * fills the array with strings.
+	 */
 	private void fillTheContentList()
 	{
 		contentList.add("motorcycles");
@@ -85,7 +100,11 @@ public class Chatbot
 	{
 		chatCount++;
 	}
-	
+	/**
+	 * This will check the user input for certain inputs and will look to see if it's a meme.
+	 * @param input is the users input into the inputbox.
+	 * @return will return a response if it detects a meme.
+	 */
 	private boolean memeChecker(String input)
 	{
 		boolean isAMeme = false;
@@ -124,7 +143,11 @@ public class Chatbot
 		
 		return okToQuit;
 	}
-	
+	/**
+	 * Checks the input of the user to check if the user contains "motorcycle"
+	 * @param input If the input is equal to "motorcycle" than it will have a response.
+	 * @return contentMessages will return a response if it detects true.
+	 */
 	public boolean contentChecker(String input)
 	{
 		boolean contentMessages = false;
@@ -138,6 +161,11 @@ public class Chatbot
 		
 	}
 	
+	/**
+	 * Will check the string to see if it's a certain length.
+	 * @param input The users input is larger than or equal to 10.
+	 * @return Will tell the user that it is too long.
+	 */
 	private boolean stringLengthChecker(String input)
 	{
 		boolean isFour = false;
@@ -149,6 +177,11 @@ public class Chatbot
 		return isFour;
 	}
 	
+	/**
+	 * Will process the text inputed into chatbot, and will check for certain variables.
+	 * @param currentInput The current input of the user.
+	 * @return Will return a response based on what was said.
+	 */
 	public String processText(String currentInput)
 	{
 		String result = "";
@@ -169,7 +202,11 @@ public class Chatbot
 		updateChatCount();
 		return result;
 	}
-	
+	/**
+	 * introduceUser will ask the user questions to get information to use to ask more questions
+	 * @param input The input of the user.
+	 * @return After you answer the question, it will grab your answer and ask you another question.
+	 */
 	private String introduceUser(String input)
 	{
 		String userQuestion = "";
@@ -206,7 +243,12 @@ public class Chatbot
 		
 		return userQuestion;
 	}
-		
+	
+	/**
+	 * This will try to ask questions to talk about different topics
+	 * @param input The input of the user
+	 * @return Will return responses to the user.
+	 */
 	private String randomChatConversation(String input)
 	{
 		String conversation = "";
@@ -279,7 +321,11 @@ public class Chatbot
 		}
 		return conversation;
 	}
-	
+	/**
+	 * Will detect if the user is mashing the keyboard.
+	 * @param input If the input is equal to random giberish it will respond
+	 * @return Will return a "mashed" response, in other words, it will take what you said it and return it 5 times.
+	 */
 	private String mashingDetected(String input)
 	{
 		String mashed = "";
@@ -293,6 +339,11 @@ public class Chatbot
 		return mashed;
 	}
 	
+	/**
+	 * This will detect if you didn't mash your keyboard.
+	 * @param input The users input.
+	 * @return Will return "Thank you..." if it detects you didn't mash your keyboard.
+	 */
 	private String noMashingDetected(String input)
 	{
 		String noMashing = "Thank you for not mashing you keyboard with ";
@@ -330,6 +381,11 @@ public class Chatbot
 		return userBasedResponse;
 	}
 	
+	/**
+	 * Will check the input.
+	 * @param input The input of the user
+	 * @return Will return a response, and add or subtract the number of times it's been used.
+	 */
 	private boolean userInputChecker(String input) //changed "userInput" to "input"
 	{
 		boolean matchesInput = false;
@@ -356,7 +412,7 @@ public class Chatbot
 	private boolean mashChecker(String input)
 	{
 		boolean isMashing = false;
-		if(input.indexOf("asdf") > -1)
+		if(input.indexOf("asdfjkl") > -1)
 		{
 			isMashing = true;
 		}
@@ -364,11 +420,19 @@ public class Chatbot
 		return isMashing;
 	}
 	
+	/**
+	 * This will get the Content Messages.
+	 * @return The content Message.
+	 */
 	public String getContentMessages()
 	{
 		return contentMessages;
 	}
 
+	/**
+	 * This will set the Content message
+	 * @param contentMessages The content message will be set.
+	 */
 	public void setContentMessages(String contentMessages)
 	{
 		this.contentMessages = contentMessages;

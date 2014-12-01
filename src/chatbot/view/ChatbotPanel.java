@@ -44,13 +44,20 @@ public class ChatbotPanel extends JPanel
 	 * @param baseController
 	 */
 	private JTextArea chatArea;
+	/**
+	 * This is the ScrollPane for the chatArea to allow the user to scroll.
+	 */
 	private JScrollPane chatPane;
 	
+	/**
+	 * This will create the Panel for the text to go into
+	 * @param baseController The controller is for the panel.
+	 */
 	public ChatbotPanel(ChatbotAppController baseController) 
 	{
 		this.baseController = baseController;
 		
-		firstButton = new JButton("click the button to add a -:D");
+//		firstButton = new JButton("click the button to add a -:D");
 		secondButton = new JButton("Click here to talk about something");
 		sendButton = new JButton("Send");
 		firstTextField = new JTextField(25);
@@ -65,6 +72,9 @@ public class ChatbotPanel extends JPanel
 		setupListeners();
 	}
 	
+	/**
+	 * This will setup the pane for the ChatArea.
+	 */
 	private void setupPane()
 	{
 		chatArea.setLineWrap(true);
@@ -72,18 +82,24 @@ public class ChatbotPanel extends JPanel
 		chatArea.setEditable(false);
 	}
 
+	/**
+	 * This will setup the Panel that everything sits inside (not the JFrame)
+	 */
 	private void setupPanel()
 	{
-		this.setBackground(Color.ORANGE);
+		this.setBackground(Color.BLUE);
 		this.setSize(400, 400);
 		this.setLayout(baseLayout);
-		this.add(firstButton);
+//		this.add(firstButton);
 		this.add(secondButton);
 		this.add(sendButton);
 		this.add(firstTextField);
 		this.add(chatPane);
 	}
 	
+	/**
+	 * This is the layout for the entire app, and where everything is located.
+	 */
 	private void setupLayout()
 	{
 		baseLayout.putConstraint(SpringLayout.WEST, firstTextField, 0, SpringLayout.WEST, this);
@@ -98,15 +114,18 @@ public class ChatbotPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, secondButton, 0, SpringLayout.WEST, chatPane);
 	}
 	
+	/**
+	 * This will make listeners (buttons) for the user to click on and to interact with the App.
+	 */
 	private void setupListeners()
 	{
-		firstButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent click)
-			{
-				
-			}
-		});
+//		firstButton.addActionListener(new ActionListener()
+//		{
+//			public void actionPerformed(ActionEvent click)
+//			{
+//				
+//			}
+//		});
 		
 		secondButton.addActionListener(new ActionListener()
 		{
@@ -130,6 +149,11 @@ public class ChatbotPanel extends JPanel
 		});
 		
 	}
+	
+	/**
+	 * This will display the text to the user inside the area.
+	 * @param input The input of chatbot to the user.
+	 */
 	public void displayTextToUser(String input)
 	{
 		chatArea.append("\n" + input);

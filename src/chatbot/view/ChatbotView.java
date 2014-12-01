@@ -3,11 +3,22 @@ package chatbot.view;
 import javax.swing.JOptionPane;
 
 import chatbot.controller.ChatbotAppController;
-
+/**
+ * This is the View for Chatbot and has the basController contents.
+ * @author zcon5199
+ * 
+ */
 public class ChatbotView
 {
+	/**
+	 * This will create the AppConroller and call is baseController.
+	 */
 	private ChatbotAppController baseController;
 	
+	/**
+	 * This is the View that Chatbot uses.
+	 * @param baseController Is the controller for the app.
+	 */
 	public ChatbotView(ChatbotAppController baseController)
 	{
 		this.baseController = baseController;

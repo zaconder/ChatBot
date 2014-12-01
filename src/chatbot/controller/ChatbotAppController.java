@@ -30,14 +30,16 @@ public class ChatbotAppController
 	 */
 	private String quitMessage;
 	/**
-	 * 
+	 * This is the String that has the contentMessages.
 	 */
 	private String contentMessages;
 	/**
-	 * Reference to the GUI JFrame object for the appliacation
+	 * Reference to the GUI JFrame object for the application.
 	 */
 	private ChatbotFrame baseFrame;
-	
+	/**
+	 * This is the controller for Chatbot and will build everything.
+	 */
 	public ChatbotAppController()
 	{
 		applicationView = new ChatbotView(this);
@@ -48,6 +50,10 @@ public class ChatbotAppController
 		contentMessages = "That's really cool I love riding motorcycles too!";
 	}
 	
+	/**
+	 * This will the Chatbot.
+	 * @return will Return the chatbot.
+	 */
 	public Chatbot getMySillyChatbot()
 	{
 		return mySillyChatbot;
