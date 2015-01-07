@@ -32,6 +32,18 @@ public class ChatbotPanel extends JPanel
 	 */
 	private JButton sendButton;
 	/**
+	 * This will create a button called "submitButton"
+	 */
+	private JButton submitButton;
+	/**
+	 * This will create a button called "saveButton"
+	 */
+	private JButton saveButton;
+	/**
+	 * This will create a button called "loadButton"
+	 */
+	private JButton loadButton;
+	/**
 	 * this will Create a TextField called "firstTextField"
 	 */
 	private JTextField firstTextField;
@@ -60,6 +72,9 @@ public class ChatbotPanel extends JPanel
 //		firstButton = new JButton("click the button to add a -:D");
 		secondButton = new JButton("Click here to talk about something");
 		sendButton = new JButton("Send");
+		submitButton = new JButton("Submit Text");
+		saveButton = new JButton("Save Text");
+		loadButton = new JButton("Load Text");
 		firstTextField = new JTextField(25);
 		baseLayout = new SpringLayout();
 		chatArea = new JTextArea(15, 30);
@@ -93,6 +108,9 @@ public class ChatbotPanel extends JPanel
 //		this.add(firstButton);
 		this.add(secondButton);
 		this.add(sendButton);
+		this.add(submitButton);
+		this.add(loadButton);
+		this.add(saveButton);
 		this.add(firstTextField);
 		this.add(chatPane);
 	}
@@ -102,16 +120,22 @@ public class ChatbotPanel extends JPanel
 	 */
 	private void setupLayout()
 	{
-		baseLayout.putConstraint(SpringLayout.WEST, firstTextField, 0, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, firstTextField, -39, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, chatPane, 20, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, sendButton, 1, SpringLayout.NORTH, firstTextField);
-		baseLayout.putConstraint(SpringLayout.WEST, sendButton, 6, SpringLayout.EAST, firstTextField);
-		baseLayout.putConstraint(SpringLayout.SOUTH, firstButton, 0, SpringLayout.SOUTH, this);
-		baseLayout.putConstraint(SpringLayout.EAST, firstButton, -10, SpringLayout.EAST, firstTextField);
+//		baseLayout.putConstraint(SpringLayout.SOUTH, firstButton, 0, SpringLayout.SOUTH, this);
+//		baseLayout.putConstraint(SpringLayout.EAST, firstButton, -10, SpringLayout.EAST, firstTextField);
 		baseLayout.putConstraint(SpringLayout.NORTH, chatPane, 20, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, secondButton, 0, SpringLayout.SOUTH, chatPane);
 		baseLayout.putConstraint(SpringLayout.WEST, secondButton, 0, SpringLayout.WEST, chatPane);
+		baseLayout.putConstraint(SpringLayout.NORTH, saveButton, 6, SpringLayout.SOUTH, secondButton);
+		baseLayout.putConstraint(SpringLayout.NORTH, loadButton, 0, SpringLayout.NORTH, submitButton);
+		baseLayout.putConstraint(SpringLayout.WEST, loadButton, 6, SpringLayout.EAST, submitButton);
+		baseLayout.putConstraint(SpringLayout.NORTH, submitButton, 6, SpringLayout.SOUTH, secondButton);
+		baseLayout.putConstraint(SpringLayout.WEST, submitButton, 0, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, sendButton, 1, SpringLayout.NORTH, firstTextField);
+		baseLayout.putConstraint(SpringLayout.WEST, sendButton, 6, SpringLayout.EAST, firstTextField);
+		baseLayout.putConstraint(SpringLayout.WEST, firstTextField, 0, SpringLayout.WEST, submitButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, firstTextField, -10, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, saveButton, 6, SpringLayout.EAST, loadButton);
 	}
 	
 	/**
@@ -145,6 +169,41 @@ public class ChatbotPanel extends JPanel
 				displayTextToUser(chatbotResponse);
 				firstTextField.setText("");
 				firstTextField.requestFocus();
+			}
+		});
+		
+		submitButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				
+			}
+		});
+		
+		saveButton.addActionListener(new ActionListener()
+		{	
+			public void actionPerformed(ActionEvent click)
+			{
+				String chat = chatArea.getText();
+				baseController.saveText(chat, true);
+			}
+		});
+		
+		loadButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				String savedChat = baseController.readTextFromFile();
+				{
+					if(savedChat.length()<1)
+					{
+						chatArea.setText("no text in file");
+					}
+					else
+					{
+						chatArea.setText(savedChat);
+					}
+				}
 			}
 		});
 		
