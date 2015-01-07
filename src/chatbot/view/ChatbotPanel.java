@@ -3,15 +3,18 @@ package chatbot.view;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
 import chatbot.controller.ChatbotAppController;
-import javax.swing.*;
-import chatbot.model.Chatbot;
 
 public class ChatbotPanel extends JPanel
 {
@@ -19,10 +22,6 @@ public class ChatbotPanel extends JPanel
 	 * This will call the ChatbotAppController and names it "baseController"
 	 */
 	private ChatbotAppController baseController;
-	/**
-	 * This will create a button called "firstButton"
-	 */
-	private JButton firstButton;
 	/**
 	 * This will create a button called "secondButton"
 	 */
@@ -69,7 +68,7 @@ public class ChatbotPanel extends JPanel
 	{
 		this.baseController = baseController;
 		
-//		firstButton = new JButton("click the button to add a -:D");
+
 		secondButton = new JButton("Click here to talk about something");
 		sendButton = new JButton("Send");
 		submitButton = new JButton("Submit Text");
@@ -105,7 +104,6 @@ public class ChatbotPanel extends JPanel
 		this.setBackground(Color.BLUE);
 		this.setSize(400, 400);
 		this.setLayout(baseLayout);
-//		this.add(firstButton);
 		this.add(secondButton);
 		this.add(sendButton);
 		this.add(submitButton);
@@ -121,8 +119,6 @@ public class ChatbotPanel extends JPanel
 	private void setupLayout()
 	{
 		baseLayout.putConstraint(SpringLayout.WEST, chatPane, 20, SpringLayout.WEST, this);
-//		baseLayout.putConstraint(SpringLayout.SOUTH, firstButton, 0, SpringLayout.SOUTH, this);
-//		baseLayout.putConstraint(SpringLayout.EAST, firstButton, -10, SpringLayout.EAST, firstTextField);
 		baseLayout.putConstraint(SpringLayout.NORTH, chatPane, 20, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, secondButton, 0, SpringLayout.SOUTH, chatPane);
 		baseLayout.putConstraint(SpringLayout.WEST, secondButton, 0, SpringLayout.WEST, chatPane);
@@ -143,13 +139,6 @@ public class ChatbotPanel extends JPanel
 	 */
 	private void setupListeners()
 	{
-//		firstButton.addActionListener(new ActionListener()
-//		{
-//			public void actionPerformed(ActionEvent click)
-//			{
-//				
-//			}
-//		});
 		
 		secondButton.addActionListener(new ActionListener()
 		{
@@ -169,6 +158,31 @@ public class ChatbotPanel extends JPanel
 				displayTextToUser(chatbotResponse);
 				firstTextField.setText("");
 				firstTextField.requestFocus();
+			}
+			
+			
+		});
+		
+		sendButton.addKeyListener(new KeyAdapter()
+		{
+			public void keyReleased(KeyEvent e)
+			{
+				String userTypedText = firstTextField.getText();
+				String chatbotResponse = baseController.sendTextToChatBot(userTypedText);
+				displayTextToUser(userTypedText);
+				displayTextToUser(chatbotResponse);
+				firstTextField.setText("");
+				firstTextField.requestFocus();
+			}
+
+			public void keyTyped(KeyEvent e)
+			{
+				
+			}
+
+			public void keyPressed(KeyEvent e)
+			{
+				
 			}
 		});
 		
