@@ -72,8 +72,8 @@ public class ChatbotPanel extends JPanel
 		secondButton = new JButton("Click here to talk about something");
 		sendButton = new JButton("Send");
 		submitButton = new JButton("Submit Text");
-		saveButton = new JButton("Save Text");
-		loadButton = new JButton("Load Text");
+		saveButton = new JButton("Save Text to file");
+		loadButton = new JButton("Load Text from file");
 		firstTextField = new JTextField(25);
 		baseLayout = new SpringLayout();
 		chatArea = new JTextArea(15, 30);
@@ -102,7 +102,7 @@ public class ChatbotPanel extends JPanel
 	private void setupPanel()
 	{
 		this.setBackground(Color.BLUE);
-		this.setSize(400, 400);
+		this.setSize(400, 500);
 		this.setLayout(baseLayout);
 		this.add(secondButton);
 		this.add(sendButton);
@@ -120,18 +120,19 @@ public class ChatbotPanel extends JPanel
 	{
 		baseLayout.putConstraint(SpringLayout.WEST, chatPane, 20, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, chatPane, 20, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, secondButton, 0, SpringLayout.SOUTH, chatPane);
-		baseLayout.putConstraint(SpringLayout.WEST, secondButton, 0, SpringLayout.WEST, chatPane);
-		baseLayout.putConstraint(SpringLayout.NORTH, saveButton, 6, SpringLayout.SOUTH, secondButton);
-		baseLayout.putConstraint(SpringLayout.NORTH, loadButton, 0, SpringLayout.NORTH, submitButton);
-		baseLayout.putConstraint(SpringLayout.WEST, loadButton, 6, SpringLayout.EAST, submitButton);
-		baseLayout.putConstraint(SpringLayout.NORTH, submitButton, 6, SpringLayout.SOUTH, secondButton);
-		baseLayout.putConstraint(SpringLayout.WEST, submitButton, 0, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, sendButton, 1, SpringLayout.NORTH, firstTextField);
 		baseLayout.putConstraint(SpringLayout.WEST, sendButton, 6, SpringLayout.EAST, firstTextField);
-		baseLayout.putConstraint(SpringLayout.WEST, firstTextField, 0, SpringLayout.WEST, submitButton);
 		baseLayout.putConstraint(SpringLayout.SOUTH, firstTextField, -10, SpringLayout.SOUTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, saveButton, 6, SpringLayout.EAST, loadButton);
+		baseLayout.putConstraint(SpringLayout.WEST, secondButton, 10, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.WEST, firstTextField, 0, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, secondButton, 0, SpringLayout.SOUTH, chatPane);
+		baseLayout.putConstraint(SpringLayout.NORTH, saveButton, 0, SpringLayout.NORTH, loadButton);
+		baseLayout.putConstraint(SpringLayout.WEST, saveButton, 1, SpringLayout.EAST, loadButton);
+		baseLayout.putConstraint(SpringLayout.NORTH, submitButton, 24, SpringLayout.SOUTH, loadButton);
+		baseLayout.putConstraint(SpringLayout.NORTH, loadButton, 22, SpringLayout.SOUTH, secondButton);
+		baseLayout.putConstraint(SpringLayout.WEST, loadButton, 0, SpringLayout.WEST, secondButton);
+		baseLayout.putConstraint(SpringLayout.EAST, loadButton, -244, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.WEST, submitButton, 0, SpringLayout.WEST, secondButton);
 	}
 	
 	/**
@@ -163,28 +164,32 @@ public class ChatbotPanel extends JPanel
 			
 		});
 		
-		sendButton.addKeyListener(new KeyAdapter()
+		firstTextField.addKeyListener(new KeyAdapter()
 		{
 			public void keyReleased(KeyEvent e)
 			{
-				String userTypedText = firstTextField.getText();
-				String chatbotResponse = baseController.sendTextToChatBot(userTypedText);
-				displayTextToUser(userTypedText);
-				displayTextToUser(chatbotResponse);
-				firstTextField.setText("");
-				firstTextField.requestFocus();
+				
 			}
 
 			public void keyTyped(KeyEvent e)
 			{
 				
+				
 			}
 
 			public void keyPressed(KeyEvent e)
 			{
-				
+				if(e.getKeyCode()==KeyEvent.VK_ENTER)
+				{
+					String userTypedText = firstTextField.getText();
+					String chatbotResponse = baseController.sendTextToChatBot(userTypedText);
+					displayTextToUser(userTypedText);
+					displayTextToUser(chatbotResponse);
+					firstTextField.setText("");
+					firstTextField.requestFocus();
+				}
 			}
-		});
+		}); 
 		
 		submitButton.addActionListener(new ActionListener()
 		{
